@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.xinqi.ihandwh.Model.BookRouteInfo;
 import com.xinqi.ihandwh.R;
 import com.xinqi.ihandwh.SearchBook.BookRouteHistoryHelper;
 import com.xinqi.ihandwh.SearchBook.SeeMap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,24 +100,43 @@ public class MyBookRootListViewAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         //无法进行加载优化处理了
         convertView=LayoutInflater.from(context).inflate(R.layout.bookroute_item, null);
-        final TextView bookinfo=(TextView) convertView.findViewById(R.id.bookinfo);
-        Button btnseemap= (Button) convertView.findViewById(R.id.seeroute);
-        Button btnDelete= (Button) convertView.findViewById(R.id.btndeleteroute);
+        final TextView bookname=(TextView) convertView.findViewById(R.id.floorNameTextView);
+        ImageView btnseemap= (ImageView) convertView.findViewById(R.id.seemap);
+        ImageView btnDelete= (ImageView) convertView.findViewById(R.id.btn_cancel_collect);
         btnseemap.setTag(position);
         btnDelete.setTag(position);
-        bookinfo.setText(bookRouteInfos.get(position).getBookname() + "\n" + bookRouteInfos.get(position).getBookcode() + "\n" + bookRouteInfos.get(position).getBookdetails());
-        btnseemap.setText(bookRouteInfos.get(position).getBookpos());
+        bookname.setText(bookRouteInfos.get(position).getBookname());
+//        btnseemap.setText(bookRouteInfos.get(position).getBookpos());
+        bookcode=bookRouteInfos.get(position).getBookcode();
+//        Log.i("bookcode","pos:"+position)
+        TextView bookid_tv= (TextView) convertView.findViewById(R.id.bookIdTextView);
+        bookid_tv.setText(bookcode);
+        /*=============*/
+        TextView bookfloor_tv= (TextView) convertView.findViewById(R.id.bookPosTextView);
+        bookfloor_tv.setText(bookRouteInfos.get(position).getBookpos());
+        /*==============================*/
+
+        TextView book_author_tv= (TextView) convertView.findViewById(R.id.bookAuthorTextView);
+        book_author_tv.setText(bookRouteInfos.get(position).getBookdetails());
+        /*=======================*/
+        TextView book_floor= (TextView) convertView.findViewById(R.id.bookPosTextView);
+        book_floor.setText(bookRouteInfos.get(position).getBookpos());
+        /*=========================*/
+        TextView book_num= (TextView) convertView.findViewById(R.id.floorUsageTextView);
+        book_num.setText("剩余"+bookRouteInfos.get(position).getBook_last()+
+        "本,共"+bookRouteInfos.get(position).getBook_total()+"本");
+
         btnseemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = (int) v.getTag();
-                bookname=bookRouteInfos.get(pos).getBookname();
-                bookcode=bookRouteInfos.get(pos).getBookcode();
+                MyBookRootListViewAdapter.this.bookname = bookRouteInfos.get(pos).getBookname();
+
 //                bookdetails=bookRouteInfos.get(position).getBookdetails();
-                bookpos=bookRouteInfos.get(pos).getBookpos();
+                bookpos = bookRouteInfos.get(pos).getBookpos();
                 intent.putExtra("floor", bookpos);
                 intent.putExtra("bookcode", bookcode);
-                intent.putExtra("bookname", bookname);
+                intent.putExtra("bookname", MyBookRootListViewAdapter.this.bookname);
                 context.startActivity(intent);
             }
         });

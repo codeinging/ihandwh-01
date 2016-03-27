@@ -39,5 +39,7 @@
     <color name="foreground_material_light">#f5f5f5</color>
     <color name="primary_text_default_material_light">#f5f5f5</color>
     <color name="primary_text_material_light">#f5f5f5</color>
+    <color name="lavender">#E6E6FA</color>
+    <color name="ghostwhite">#F8F8FF</color>
 
 </resources>

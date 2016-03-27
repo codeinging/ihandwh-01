@@ -172,7 +172,11 @@ public class SearchBookResultAdapter extends RecyclerView.Adapter<RecyclerView.V
                      bookRouteHistoryHelper = new BookRouteHistoryHelper(parent);
                     if (!routeContains(mDataSet.get(position).code)){
                         toggleButton.setBackgroundResource(R.drawable.collect_press);
-                        boolean b=bookRouteHistoryHelper.insertBookRoute(mDataSet.get(position).name,mDataSet.get(position).code,mDataSet.get(position).detail,mDataSet.get(position).marcno);
+                        boolean b=bookRouteHistoryHelper.insertBookRoute(mDataSet.get(position).
+                                name,mDataSet.get(position).code,mDataSet.
+                                get(position).detail,mDataSet.get(position).marcno,
+                                mDataSet.get(position).total.toString(),
+                                mDataSet.get(position).rest.toString());
                         if (b) {
                             Toast.makeText(parent, "收藏路线", Toast.LENGTH_SHORT).show();
                             Log.i("bac", "搜藏" + b);

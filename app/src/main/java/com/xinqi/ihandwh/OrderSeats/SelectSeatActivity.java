@@ -12,28 +12,26 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 import com.xinqi.ihandwh.ConfigCenter.LoginActivity;
 import com.xinqi.ihandwh.HttpService.OrderSeatService.OrderSeatService;
 import com.xinqi.ihandwh.Local_Utils.FloorName2ID;
 import com.xinqi.ihandwh.Local_Utils.UserinfoUtils;
 import com.xinqi.ihandwh.Model.SeatInfo;
-//import com.xinqi.ihandwh.R;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.PushAgent;
 import com.xinqi.ihandwh.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+//import com.xinqi.ihandwh.R;
 
 /**
  * Created by syd on 2015/11/13.

@@ -79,10 +79,15 @@ public class NewSearch extends AppCompatActivity implements View.OnClickListener
                     historylistView.setAdapter(searchHistoryListAdapter);
                     historylistView.setVisibility(View.VISIBLE);
                     clearhis.setVisibility(View.VISIBLE);
-                    if (his.get(0).contains("没有搜索记录"))
+                    if (his.get(0).contains("没有搜索记录")){
+                        clearhis.setText("没有搜索记录");
                         clearhis.setEnabled(false);
-                    else
+
+                    }
+                    else{
+                        clearhis.setText("清除搜索记录");
                         clearhis.setEnabled(true);
+                    }
 
                 }
                 return false;
@@ -111,6 +116,7 @@ public class NewSearch extends AppCompatActivity implements View.OnClickListener
         });
         clearhis= (Button) findViewById(R.id.newsearchbtnclearhis);
         if (his.get(0).contains("没有搜索记录"))
+            clearhis.setText("没有搜索记录");
             clearhis.setEnabled(false);
         //清楚查找记录
         clearhis.setOnClickListener(this);

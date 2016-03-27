@@ -21,11 +21,13 @@ public class BookRouteHistoryHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME="BookRoute";
     //行id，安卓一般以_id开始
     private static final String KEY_ROW_ID="_id";
-    //列名，本数据库包括四列
+    //列名，本数据库包括六列
     private static final String KEY_BOOK_NAME ="bookname";
     private static final String KEY_BOOK_CODE ="bookcode";
     private static final String KEY_BOOK_DETAILS ="bookdetails";
     private static final String KEY_BOOK_POS ="pos";
+    private static final String KEY_BOOK_TOTAL ="total";
+    private static final String KEY_BOOK_LAST ="last";
 //    String firstid;
     final Context context;
     /**
@@ -61,7 +63,7 @@ public class BookRouteHistoryHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_NAME + " ( " +
                 KEY_ROW_ID + " INTEGER PRIMARY KEY , " +
                 KEY_BOOK_NAME + " TEXT ," +
-                KEY_BOOK_POS + " TEXT ," + KEY_BOOK_DETAILS + " TEXT ," + KEY_BOOK_CODE + " TEXT );");
+                KEY_BOOK_POS + " TEXT ,"+ KEY_BOOK_LAST+ " TEXT ," + KEY_BOOK_TOTAL + " TEXT ,"+ KEY_BOOK_DETAILS + " TEXT ," + KEY_BOOK_CODE + " TEXT );");
     }
 
     /**
@@ -93,7 +95,7 @@ public class BookRouteHistoryHelper extends SQLiteOpenHelper {
             ArrayList<BookRouteInfo> bookRouteInfos=new ArrayList<>();
             SQLiteDatabase sqLiteDatabase=getReadableDatabase();
         //按时间先后排序获取
-        Cursor cursor=sqLiteDatabase.query(TABLE_NAME, new String[]{KEY_BOOK_NAME, KEY_BOOK_DETAILS, KEY_BOOK_CODE,KEY_BOOK_POS}, null, null, null, null,null);
+        Cursor cursor=sqLiteDatabase.query(TABLE_NAME, new String[]{KEY_BOOK_NAME, KEY_BOOK_DETAILS, KEY_BOOK_CODE,KEY_BOOK_POS,KEY_BOOK_TOTAL,KEY_BOOK_LAST}, null, null, null, null,null);
         for (cursor.moveToLast();!(cursor.isBeforeFirst());cursor.moveToPrevious()) {
           /*  OrderInfo orderInfo=new OrderInfo();
             orderInfo.setRoom(cursor.getString(cursor.getColumnIndex(KEY_BOOK_NAME)));
@@ -105,6 +107,8 @@ public class BookRouteHistoryHelper extends SQLiteOpenHelper {
             bookRouteInfo.setBookcode(cursor.getString(cursor.getColumnIndex(KEY_BOOK_CODE)));
             bookRouteInfo.setBookpos(cursor.getString(cursor.getColumnIndex(KEY_BOOK_POS)));
             bookRouteInfo.setBookdetails(cursor.getString(cursor.getColumnIndex(KEY_BOOK_DETAILS)));
+            bookRouteInfo.setBook_total(cursor.getString(cursor.getColumnIndex(KEY_BOOK_TOTAL)));
+            bookRouteInfo.setBook_last(cursor.getString(cursor.getColumnIndex(KEY_BOOK_LAST)));
             bookRouteInfos.add(bookRouteInfo);
 
         }
@@ -145,13 +149,16 @@ public class BookRouteHistoryHelper extends SQLiteOpenHelper {
         return count;
     }*/
     //add an orderinfo
-    public boolean insertBookRoute(String bookname, String bookcode, String bookdetails,String bookpos){
+    public boolean insertBookRoute(String bookname, String bookcode, String bookdetails,String bookpos,String booktotal,String booklast){
         SQLiteDatabase sqLiteDatabase=getWritableDatabase();
         ContentValues contentValues=new ContentValues();
         contentValues.put(KEY_BOOK_NAME,bookname);
         contentValues.put(KEY_BOOK_DETAILS,bookdetails);
         contentValues.put(KEY_BOOK_CODE,bookcode);
         contentValues.put(KEY_BOOK_POS,bookpos);
+        contentValues.put(KEY_BOOK_TOTAL,booktotal);
+        contentValues.put(KEY_BOOK_LAST,booklast);
+
         //保证最多只保留50条记录
        /* long count=getOrderInfoSize();
         Log.i("bac",count+"====================");*/
