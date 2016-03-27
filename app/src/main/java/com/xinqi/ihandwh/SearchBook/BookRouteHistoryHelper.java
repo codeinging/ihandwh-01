@@ -65,7 +65,6 @@ public class BookRouteHistoryHelper extends SQLiteOpenHelper {
                 KEY_BOOK_NAME + " TEXT ," +
                 KEY_BOOK_POS + " TEXT ,"+ KEY_BOOK_LAST+ " TEXT ," + KEY_BOOK_TOTAL + " TEXT ,"+ KEY_BOOK_DETAILS + " TEXT ," + KEY_BOOK_CODE + " TEXT );");
     }
-
     /**
      * Called when the database needs to be upgraded. The implementation
      * should use this method to drop tables, add tables, or do anything else it
